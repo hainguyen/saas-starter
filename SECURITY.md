@@ -14,6 +14,4 @@ currently being supported with security updates.
 
 We take the security of this starter kit seriously. If you find a vulnerability, please **DO NOT** open a public issue.
 
-Instead, please email **contact@example.com**.
 
-We will acknowledge your email within 48 hours.
