@@ -1,152 +1,118 @@
-# Production SaaS Starter Kit
- 
- [![Go Report Card](https://goreportcard.com/badge/github.com/moasq/production-saas-starter)](https://goreportcard.com/report/github.com/moasq/production-saas-starter)
- [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
- 
- **The high-performance, self-hosted alternative to Indie Hacker boilerplates.**
- 
- **Modular Monolith. Hexagonal Architecture. Enterprise practices for every scale.**
+# ⭐ Production SaaS Starter Kit
+
+The Enterprise-Grade SaaS boilerplate for serious founders. Built with **Next.js 16** and **Go 1.25**.
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/moasq/production-saas-starter)](https://goreportcard.com/report/github.com/moasq/production-saas-starter)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ![Dashboard Preview](docs/dashboard.png)
 
-## 🔓 The "No Lock-In" Guarantee
+## 🛠️ Built With
 
-This kit is built on a simple premise: **You own the infrastructure.**
+### Frontend Stack
 
-Most "modern" stacks quietly lock you into Vercel, AWS Lambda, or Supabase. We give you standard, battle-tested Docker containers.
+- **[Next.js 16](https://nextjs.org)** (v16.0.10)
+  Modern React framework with App Router and API routes.
+- **[React 19](https://react.dev)** (v19.2.3)
+  Latest React with improved performance and concurrent features.
+- **[TypeScript](https://www.typescriptlang.org)** (v5.7.3)
+  Type-safe JavaScript for enhanced developer experience.
+- **[Tailwind CSS](https://tailwindcss.com)** (v3.4.17)
+  Utility-first CSS framework for rapid UI development.
+- **[shadcn/ui](https://ui.shadcn.com)** + **Radix UI**
+  Accessible component library with 29+ pre-built components.
+- **[TanStack Query](https://tanstack.com/query)** (v5.90.5)
+  Powerful data fetching and state management.
+- **[Zustand](https://zustand-demo.pmnd.rs)** (v5.0.8)
+  Lightweight state management for UI state.
+- **[react-hook-form](https://react-hook-form.com)** + **[Zod](https://zod.dev)**
+  Type-safe forms with schema validation.
+- **[Stytch](https://stytch.com)**
+  Enterprise authentication with magic links, OAuth, and SSO.
+- **[Polar.sh](https://polar.sh)**
+  Billing integration and subscription management.
+- **[Recharts](https://recharts.org)**
+  Composable charting library for data visualization.
 
-- **Ready to deploy anywhere:** Runs on a $5 DigitalOcean Droplet, AWS ECS, Google Cloud Run, or bare metal.
-- **No "Serverless" Tax:** Usage costs don't scale exponentially with your traffic.
-- **Full Control:** We provide standard `Dockerfiles`. Eject at any time.
+### Backend Stack
 
-## 💎 Business Value > Tech Specs
+- **[Go 1.25](https://go.dev)**
+  High-performance, concurrent backend with excellent tooling.
+- **[Gin](https://gin-gonic.com)**
+  Fast HTTP web framework with middleware support.
+- **[PostgreSQL](https://www.postgresql.org)** with **[pgvector](https://github.com/pgvector/pgvector)**
+  Reliable relational database with vector similarity search.
+- **[SQLC](https://sqlc.dev)**
+  Type-safe SQL compiler for Go (no ORM).
+- **[Stytch B2B](https://stytch.com)**
+  Enterprise authentication, SSO, and RBAC.
+- **[Polar.sh](https://polar.sh)**
+  Merchant of Record for subscriptions, invoicing, and global tax compliance.
+- **[OpenAI API](https://openai.com)**
+  LLM integration with RAG pipeline and vector embeddings.
+- **[Mistral AI](https://mistral.ai)**
+  OCR service for document data extraction.
+- **[Cloudflare R2](https://www.cloudflare.com/products/r2/)**
+  Object storage for file management.
+- **[Docker](https://www.docker.com)** + **Docker Compose**
+  Containerization for consistent environments.
 
-We chose boring, reliable technology so you can focus on building value.
+## 🥇 Features
 
-| Capability | The Technical Reality | The Business Value |
-| :--- | :--- | :--- |
-| **Operational Stability** | Go (Golang) Backend | Compile to a single binary. Low memory footprint. High concurrency. |
-| **Type-Safe Reliability** | SQLC + Postgres | Eliminate runtime SQL errors before they reach production. |
-| **Gateway Security** | Middleware Pipeline | Zero-Trust pipeline handles Auth & RBAC before business logic executes. |
-| **Cognitive Governance** | Hexagonal Architecture | Business logic is isolated from tools. Swap Stripe for Paddle without rewriting the core. |
-| **Hermetic Dev** | Docker Compose | Onboarding a new dev takes 10 minutes, not 2 days. |
+- **Authentication**: Sign in with Magic Link, Google OAuth, and Enterprise SSO.
+- **Multi-Tenancy**: Built-in Organization support with strict data isolation.
+- **Roles & Permissions**: Granular RBAC system with 3 roles (Member, Manager, Admin) and 7 permission types.
+- **Billing & Subscriptions**: Complete integration with Polar.sh for SaaS pricing models.
+- **AI & RAG**: Ready-to-use vector embeddings pipeline for AI features.
+- **OCR Service**: Extract structured data from valid documents instantly.
+- **Team Management**: Invite members, manage roles, and update settings.
+- **Responsive Design**: Mobile-first UI built with Tailwind CSS and shadcn/ui.
+- **Type Safety**: End-to-end type safety from database (SQLC) to frontend (TypeScript).
 
-## ✨ Features Matrix
+## ➡️ Coming Soon
 
-| Feature | Implementation | Description |
-| :--- | :--- | :--- |
-| **Multi-Tenancy** | ✅ Organization Isolation | Data is logically isolated by `organization_id`. |
-| **RBAC** | ✅ Role-Based Access | Granular permission checks (`can:edit_billing`). |
-| **AI & RAG** | ✅ LLM Pipeline | Pre-configured OpenAI/Mistral client with vector embeddings. |
-| **OCR** | ✅ Document Parsing | Extract text from PDFs and Images instantly. |
-| **File Storage** | ✅ S3 Compatible | Ready-to-use Cloudflare R2 / AWS S3 integration. |
-| **Billing** | ✅ Merchant of Record | Integrated Subscriptions, Invoices, and Webhook Sync. |
-| **Database** | ✅ Postgres + SQLC | Type-safe SQL. No GORM magic blackboxing. |
-| **Cache** | ✅ Redis | Fast session management and caching. |
+- **Audit Logs**: Complete audit logging system for tracking user activities.
+- **Webhooks UI**: Customer-facing webhook configuration.
+- **Advanced Analytics**: Built-in charts and usage tracking.
 
-## 🏗 Architecture
+## ✨ Getting Started
 
-We use a **Modular Monolith** structure. This gives you the code modularity of microservices without the operational complexity.
+Please follow these simple steps to get a local copy up and running.
 
-![Architecture Diagram](docs/architecture.png)
+### Prerequisites
 
-```mermaid
-graph TD
-    User((User)) -->|HTTPS| API[Go API Gateway]
-    
-    subgraph "Core (Hexagonal)"
-        API -->|Auth Middleware| Guard{"RBAC Check"}
-        Guard -->|Context| Handler["Handler Layer"]
-        Handler -->|DTO| Service["Service Layer (Business Logic)"]
-        Service -->|Interface| Repo["Repository Adapter"]
-    end
-    
-    Repo -->|SQL| DB[(Postgres)]
-    Repo -->|Cache| Redis[(Redis)]
-    Service -->|Async| Async["Async Worker (In-Memory)"]
+- **Docker** & **Docker Compose**
+- **Go 1.25+**
+- **Node.js 20+** & **pnpm**
+
+### The One-Line Setup
+
+Run this command to configure your keys and start the infrastructure:
+
+```bash
+chmod +x setup.sh && ./setup.sh
 ```
 
-## 🚀 Getting Started
- 
- ### 0. Prerequisites
- 
- > [!IMPORTANT]
- > Before running any commands, please read **[SETUP.md](./SETUP.md)** to ensure your environment is ready.
- 
- You will need:
- *   **Docker & Docker Compose** (Required for Database)
- *   **Go 1.25+** (Required for Backend)
- *   **Node.js 20+ & pnpm** (Required for Frontend)
- *   **Make** (Required for running commands)
- 
- ### 1. The One-Line Setup
- This command sets executable permissions, generates local environment keys, and boots the infrastructure.
- 
- ```bash
- # Make script executable and run it
- chmod +x setup.sh && ./setup.sh
- ```
- 
- **What this script does:**
- 
- 1.  **Config:** Copies `.env.example` to `.env` (if missing).
- 2.  **Infra:** Starts Postgres (Port 5432) & Redis (Port 6379) in Docker.
- 3.  **Schema:** Runs `migrate up` to create tables.
- 
- ### 2. Start the Servers
- 
- Open two terminal tabs:
- 
- **Backend:**
- ```bash
- cd go-b2b-starter
- make dev
- ```
- 
- **Frontend:**
- ```bash
- cd next_b2b_starter
- pnpm dev
- ```
- 
- ### 3. Verify it works
- 
- *   **Frontend:** [http://localhost:3000](http://localhost:3000) (Login Screen)
- *   **Backend API:** [http://localhost:8080/health](http://localhost:8080/health) (Should return `{"status":"OK"}`)
- 
- ### 🛑 Troubleshooting
- 
- If the containers start but the app isn't working, view the logs:
- 
- ```bash
- docker compose logs -f postgres
- # or
- make dev # Shows backend logs directly in terminal
- ```
+**Manual Start:**
 
-## 🚀 Consulting & Services
- 
- This kit is designed to be self-service, but growing startups often need specialized expertise to move faster.
- 
- I accept a limited number of high-touch projects.
- 
- ### How we can work together:
- 
- 1.  **Managed Deployment:**
-     Skip the DevOps learning curve. I will provision your infrastructure (AWS, GCP, DigitalOcean), configure the production environment (Postgres, Redis, CI/CD), and hand you the keys to a live, secure application.
- 
- 2.  **Custom Feature Development:**
-     Need advanced capabilities like **SAML/SSO**, **Usage-based Billing**, or **RAG Pipelines**? I will architect and implement these features directly into your repository, ensuring they fit the Hexagonal pattern perfectly.
- 
- 3.  **Architecture Migration & Audit:**
-     Migrating from Node.js/Python or scaling a legacy Go app? I offer deep-dive code reviews and architectural roadmaps to ensure your system can handle the next 10x of growth.
- 
- **Interested?**
-Email me with a brief summary of your stack and your biggest current bottleneck.
- 
- **[m.salim@apflowhq.com](mailto:m.salim@apflowhq.com)**
- 
- ### Contact
- * **X (Twitter):** [**@foundmod**](https://x.com/foundmod) — *DMs Open*
+1.  **Backend:** `cd go-b2b-starter && make dev`
+2.  **Frontend:** `cd next_b2b_starter && pnpm dev`
+3.  **Visit:** [http://localhost:3000](http://localhost:3000)
 
-```
+> [!IMPORTANT]
+> See **[SETUP.md](./SETUP.md)** for full details.
+
+## 🛡️ License
+
+[MIT License](./LICENSE)
+
+## 👯 Consulting & Services
+
+Although this kit is self-service, I help ambitious founders move faster.
+
+**I can help you with:**
+1.  **Managed Config:** I sets up your AWS/GCP production environment so you never touch DevOps.
+2.  **Custom Features:** Need SAML SSO or complex RAG flows? I'll build them directly into your repo.
+3.  **Code Audits:** Migrating from Node/Python? I'll review your architecture for scale.
+
+**[m.salim@apflowhq.com](mailto:m.salim@apflowhq.com)** • [**@foundmod**](https://x.com/foundmod)
