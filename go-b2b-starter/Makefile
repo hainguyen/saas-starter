@@ -20,7 +20,7 @@ stop-deps:
 
 # Create a new database migration file
 create-migration:
-	@migrate create -ext sql -dir $(MIGRATION_DIR) -seq $(MIGRATION_NAME)
+	@docker compose -f $(COMPOSE_FILE) run --rm cli migrate create -ext sql -dir $(MIGRATION_DIR) -seq $(MIGRATION_NAME)
 	@echo "Migration created in $(MIGRATION_DIR) with name $(MIGRATION_NAME)"
 
 # Apply all up migrations
