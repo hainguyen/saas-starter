@@ -2,6 +2,37 @@
 
 The codebase uses Clean Architecture with dependency injection to maintain separation of concerns and testability.
 
+## Project Layout (Go Standard 2026)
+
+```
+go-b2b-starter/
+├── cmd/                  # Application entry points
+│   └── api/
+│       └── main.go       # Main entry point
+│
+├── internal/             # Private application code (import boundary)
+│   ├── bootstrap/        # Application initialization
+│   ├── api/              # Route registration
+│   │
+│   ├── auth/             # Authentication & RBAC module
+│   ├── billing/          # Subscription & billing module
+│   ├── organizations/    # Multi-tenant organizations
+│   ├── documents/        # Document management
+│   ├── cognitive/        # AI/RAG features
+│   │
+│   ├── db/               # Database layer (SQLC)
+│   ├── server/           # HTTP server & middleware
+│   ├── redis/            # Redis client
+│   └── stytch/           # Auth provider adapter
+│
+├── pkg/                  # Public reusable packages
+│   ├── httperr/          # HTTP error types
+│   ├── pagination/       # Pagination helpers
+│   └── response/         # API response utilities
+│
+└── go.mod                # Single consolidated module
+```
+
 ## Clean Architecture Layers
 
 The project is organized into four distinct layers:
@@ -25,7 +56,7 @@ API → Application → Domain ← Infrastructure
 
 ## Layer Responsibilities
 
-### Domain Layer (`src/app/{module}/domain/`)
+### Domain Layer (`internal/{module}/domain/`)
 
 The core business logic layer.
 
@@ -37,7 +68,7 @@ The core business logic layer.
 
 **Key principle**: No external dependencies. Pure business logic only.
 
-### Application Layer (`src/app/{module}/app/`)
+### Application Layer (`internal/{module}/app/`)
 
 Orchestrates domain operations to implement use cases.
 
@@ -49,7 +80,7 @@ Orchestrates domain operations to implement use cases.
 
 **Key principle**: Uses domain interfaces, never infrastructure directly.
 
-### Infrastructure Layer (`src/app/{module}/infra/`)
+### Infrastructure Layer (`internal/{module}/infra/`)
 
 Implements domain interfaces using concrete technologies.
 
@@ -61,7 +92,7 @@ Implements domain interfaces using concrete technologies.
 
 **Key principle**: Depends on domain interfaces. Hidden behind abstractions.
 
-### API Layer (`src/api/{module}/`)
+### Handler Layer (`internal/{module}/handler.go`)
 
 Handles HTTP concerns.
 
@@ -87,12 +118,12 @@ type ResourceRepository interface {
 
 // 2. Implement in infrastructure
 type resourceRepository struct {
-    store adapters.ResourceStore
+    queries *db.Queries
 }
 
 // 3. Register in DI container
-container.Provide(func(store adapters.ResourceStore) domain.ResourceRepository {
-    return NewResourceRepository(store)
+container.Provide(func(queries *db.Queries) domain.ResourceRepository {
+    return NewResourceRepository(queries)
 })
 
 // 4. Inject into services
@@ -113,25 +144,27 @@ container.Provide(func(repo domain.ResourceRepository) services.ResourceService 
 Each business module follows a standard structure:
 
 ```
-src/app/{module}/
-├── domain/          # Entities, interfaces
-├── app/services/    # Business logic
-├── infra/          # Implementations
-├── cmd/init.go     # Initialization
-└── module.go       # DI registration
+internal/{module}/
+├── domain/           # Entities, interfaces
+├── app/services/     # Business logic
+├── infra/            # Implementations
+├── cmd/init.go       # Initialization
+├── handler.go        # HTTP handlers
+├── routes.go         # Route registration
+└── provider.go       # DI registration
 ```
 
 ### Module Registration
 
-Every module has a `module.go` file that registers its dependencies:
+Every module has initialization in `cmd/init.go` that registers its dependencies:
 
 - Repositories (infrastructure → domain interface)
 - Services (application layer)
-- Event listeners (if applicable)
+- Handlers (HTTP layer)
 
 ### Initialization Order
 
-Defined in `src/main/cmd/init_mods.go`:
+Defined in `internal/bootstrap/init_mods.go`:
 
 1. **Infrastructure** - Database, logging, server
 2. **Shared Services** - File storage, event bus, payments
@@ -225,11 +258,11 @@ Never use global variables or hidden dependencies.
 
 | Pattern | File |
 |---------|------|
-| DI container setup | `src/main/cmd/root.go` |
-| Module initialization order | `src/main/cmd/init_mods.go` |
-| Module DI registration | `src/app/*/module.go` |
-| Package initialization | `src/pkg/*/cmd/init.go` |
-| API route setup | `src/api/provider.go` |
+| DI container setup | `internal/bootstrap/root.go` |
+| Module initialization order | `internal/bootstrap/init_mods.go` |
+| Module DI registration | `internal/*/cmd/init.go` |
+| Package initialization | `pkg/*/init.go` |
+| API route setup | `internal/api/routes.go` |
 
 ## Next Steps
 
