@@ -44,12 +44,22 @@
  
  9. **[Adding a Feature](./09-adding-a-feature.md)**
     High-level checklist for comprehensive features.
- 
+
+ 10. **[Server Actions](./10-server-actions.md)**
+     Creating and using Server Actions for mutations.
+
+ 11. **[Feature Guards](./11-feature-guards.md)**
+     Protecting features with auth, permission, and subscription guards.
+
+ 12. **[Subscription Patterns](./12-subscription-patterns.md)**
+     Managing subscriptions, checkout, and billing with Polar.sh.
+
  ## Quick Reference
  
- - **Auth**: `requireMemberSession()` (Server) / `useStytchMember()` (Client)
+ - **Auth**: `getMemberSession()` (Server) / `useStytchMember()` (Client)
  - **Permissions**: `getServerPermissions()` (Server) / `usePermissions()` (Client)
  - **Data**: `apiClient.get()` or `useQuery()`
+ - **Server Actions**: Server-side mutations with auth/permission guards
  
  ## Project Structure
  

@@ -384,7 +384,7 @@ Create `app/vendors/new/page.tsx`:
 
 ```typescript
 import { requireMemberSession } from '@/lib/auth/stytch/server';
-import { getServerPermissions } => '@/lib/auth/server-permissions';
+import { getServerPermissions } from '@/lib/auth/server-permissions';
 import { VendorForm } from '../components/vendor-form';
 
 export default async function NewVendorPage() {
