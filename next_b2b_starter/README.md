@@ -27,7 +27,7 @@
  
  ## Features
  
- - **Stack**: Next.js 15, TypeScript, Tailwind, shadcn/ui
+ - **Stack**: Next.js 16, TypeScript, Tailwind, shadcn/ui
  - **Auth**: Stytch B2B (passwordless)
  - **Billing**: Polar.sh integration
  - **State**: React Query + Zustand
